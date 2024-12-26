@@ -1,0 +1,33 @@
+{% extends "base_user.html" %}
+
+{% block content %}
+<!-- user profile page -->
+<div class="container mx-auto">
+    <div class="flex justify-center items-center">
+        <div class="bg-white p-8 rounded shadow-md w-3/4">
+            <h1 class="text-center text-2xl mb-4">User Profile</h1>
+            <table class="mx-auto">
+                <tr>
+                    <td><strong>Name:</strong></td>
+                    <td>{{ user.name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Email:</strong></td>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Phone:</strong></td>
+                    <td>{{ user.phone }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Address:</strong></td>
+                    <td>{{ user.address }}</td>
+                </tr>
+            </table>
+            <div class="flex justify-center items-center">
+                <a href="{{ url_for('edit_profile') }}" class="bg-blue-500 text-white rounded p-2">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

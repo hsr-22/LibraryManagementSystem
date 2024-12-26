@@ -1,0 +1,52 @@
+{% extends "base_user.html" %}
+
+{% block content %}
+<!-- user return page displaying all books borrowed by user and having an action of return -->
+<div class="container mx-auto">
+    <div class="flex justify-center items-center">
+        <div class="bg-white p-8 rounded shadow-md w-3/4">
+            <h1 class="text-center text-2xl mb-4">Borrowed Books</h1>
+            <table class="mx-auto border-collapse">
+                <thead>
+                    <tr>
+                        <th class="border border-black px-4 py-2">Book ID</th>
+                        <th class="border border-black px-4 py-2">Book Name</th>
+                        <th class="border border-black px-4 py-2">Author</th>
+                        <th class="border border-black px-4 py-2">Return</th>
+                        <th class="border border-black px-4 py-2">Review</th>
+                        <th class="border border-black px-4 py-2">Read</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tr, member, book in trans %}
+                    {% if member == current_user %}
+                    <tr>
+                        <td class="border border-black px-4 py-2">{{ book.id }}</td>
+                        <td class="border border-black px-4 py-2">{{ book.title }}</td>
+                        <td class="border border-black px-4 py-2">{{ book.author }}</td>
+                        <td class="border border-black px-4 py-2">
+                            <form method="GET" action="{{ url_for('return_book', id = tr.id) }}">
+                                <button type="submit" class="bg-red-500 text-white rounded p-2">RETURN</button>
+                            </form>
+                        </td>
+                        <!-- add button for reviewing book -->
+                        <td class="border border-black px-4 py-2">
+                            <form method="GET" action="{{ url_for('feedback', book_id = book.id) }}">
+                                <button type="submit" class="bg-blue-500 text-white rounded p-2">REVIEW</button>
+                            </form>
+                        </td>
+                        <!-- add button for reading book -->
+                        <td class="border border-black px-4 py-2">
+                            <form method="GET" action="{{ url_for('read_book', id = book.id) }}">
+                                <button type="submit" class="bg-blue-500 text-white rounded p-2">READ</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

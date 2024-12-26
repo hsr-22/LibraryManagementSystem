@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="flex justify-center items-center  bg-gray-100">
+    <div class="bg-white p-8 rounded shadow-md w-3/4">
+        <h1 class="text-2xl mb-4">Edit Section</h1>
+        <form method="POST" action="{{ url_for('edit_section',id=section.id) }}">
+            <label for="name" class="block mb-2">Name:</label>
+            <input type="text" name="name" class="w-full border rounded p-2 mb-2" value="{{section.name}}"><br>
+
+            <label for="description" class="block mb-2">Description:</label>
+            <input type="text" name="description" class="w-full border rounded p-2 mb-2"
+                value="{{section.description}}"><br>
+
+            <button type="submit" class="bg-blue-500 text-white rounded p-2"
+                onclick="return Confirm('Are you sure')">Confirm</button>
+        </form>
+    </div>
+</div>
+{% endblock%}

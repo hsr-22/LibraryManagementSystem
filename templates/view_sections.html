@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for section in sections %}
+        <div class="col-md-6">
+            <div class="card mb-4" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px;">
+                <div class="card-body">
+                    <h5 class="card-title text-center font-weight-bold"><strong>{{ section.name }}</strong></h5>
+                    <p class="card-text text-center">{{ section.description }}</p>
+                    <a href="{{ url_for('book_list', searchs=section.id) }}" class="btn btn-primary btn-sm"
+                        style="padding: 5px; font-size: 12px;">View
+                        Books</a>
+                    <a class="bg-green-500 btn btn-success text-white rounded hover:bg-green-600 col-6 btn-sm"
+                        href="edit_section/{{section.id}}" style="padding: 5px; font-size: 12px;">
+                        Edit </a>
+                    <a class="bg-red-500 btn btn-danger text-white rounded hover:bg-red-600 col-6 btn-sm"
+                        href="delete_section/{{section.id}}" onclick="return confirm('Are you sure')"
+                        style="padding: 5px; font-size: 12px;"> Delete </a>
+                </div>
+            </div>
+        </div>
+        {% if loop.index % 2 == 0 %}
+        <div class="w-50"></div>
+        {% endif %}
+        {% endfor %}
+        <div class="col-md-4">
+            <div class="card mb-4" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px;">
+                <div class="card-body">
+                    <h5 class="card-title text-center font-weight-bold"><strong>Add New Section</strong></h5>
+                    <p class="card-text text-center">Click the button below to add a new section.</p>
+                    <a href="{{ url_for('add_section') }}" class="btn btn-primary btn-sm"
+                        style="padding: 5px; font-size: 12px;">Add Section</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base_user.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 style="text-align: center;"><strong>Book Requests</strong></h1>
+
+    <table class="w-full bg-white border border-gray-200 border-collapse">
+        <thead>
+            <tr class="bg-gray-100">
+                <th class="py-2 px-4 text-left border border-gray-200">Book Id</th>
+                <th class="py-2 px-4 text-left border border-gray-200">Book Title</th>
+                <th class="py-2 px-4 text-left border border-gray-200">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request, book in book_requests %}
+            <tr class="{{ 'bg-gray-50' if loop.index is even else 'bg-white' }}">
+                <td class="py-2 px-4 border border-gray-200">{{ book.id }}</td>
+                <td class="py-2 px-4 border border-gray-200"><a href="/view_book/{{book.id}}" class="text-blue"
+                        title="Show More details">{{ book.title }}</a></td>
+                <td class="py-2 px-4 border border-gray-200"
+                    style="color: {% if request.request_status == 'pending' %}gold {% elif request.request_status == 'rejected' %}red {% else %}green{% endif %};">
+                    {{ request.request_status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

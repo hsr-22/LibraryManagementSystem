@@ -1,0 +1,37 @@
+{% extends 'base_user.html' %}
+
+{% block content %}
+<h1 style="text-align: center; font-weight: bold;"><strong>Feedback Collection</strong></h1>
+<br>
+<div style="display: flex; justify-content: center;">
+    <div style="background-color: white; padding: 20px;">
+        <form action="{{ url_for('feedback', book_id=book_id ) }}" method="POST">
+            <input type="hidden" name="book_id" value="{{ book_id }}">
+            <br>
+            <label for="title" class="block mb-2">Book Title:</label>
+            <p>{{ book.title }}</p>
+
+            <br>
+            <label for="rating" class="block mb-2">Book Rating:</label>
+            <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5" title="5 Stars">5</label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4" title="4 Stars">4</label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3" title="3 Stars">3</label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2" title="2 Stars">2</label>
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1" title="1 Star">1</label>
+            </div>
+            <br>
+            <label for="review" class="block mb-2">Book Review:</label>
+            <textarea name="review" id="review" rows="5" cols="40"></textarea>
+            <br>
+            <button type="submit" class="bg-blue-500  center text-white rounded p-2">Submit Feedback</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 style="text-align: center; background-color: yellow;"><strong>Request Accept/Reject Page</strong></h1>
+    <table class="w-full bg-white border border-gray-200 border-collapse">
+        <thead>
+            <tr class="bg-gray-100">
+                <th class="py-2 px-4 text-left border border-gray-200">Member Id</th>
+                <th class="py-2 px-4 text-left border border-gray-200">Title</th>
+                <th class="py-2 px-4 text-left border border-gray-200">Author</th>
+                <th class="py-2 px-4 text-left border border-gray-200">ISBN</th>
+                <th class="py-2 px-4 text-left border border-gray-200">Publisher</th>
+                <th class="py-2 px-4 text-left border border-gray-200">Stock</th>
+                <th class="py-2 px-4 text-left border border-gray-200">Request Date</th>
+                <th class="py-2 px-4 text-left border border-gray-200">Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for req, member, book, stock in requests %}
+            <tr class="{{ 'bg-gray-50' if loop.index is even else 'bg-white' }}">
+                <td class="py-2 px-4 border border-gray-200">{{ member.id }}</td>
+                <td class="py-2 px-4 border border-gray-200"><a href="/view_book/{{ book.id }}" class="text-blue"
+                        title="Show More details">{{ book.title }}</a></td>
+                <td class="py-2 px-4 border border-gray-200">{{ book.author }}</td>
+                <td class="py-2 px-4 border border-gray-200">{{ book.isbn }}</td>
+                <td class="py-2 px-4 border border-gray-200">{{ book.publisher }}</td>
+                <td class="py-2 px-4 border border-gray-200">
+                    Total: {{ stock.total_quantity }}, Available: {{ stock.available_quantity }}
+                </td>
+                <td class="py-2 px-4 border border-gray-200">{{ req.request_date }}</td>
+                <td class="py-2 px-4 border border-gray-200">
+                    <form action="/acceptrequest" method="post">
+                        <input type="hidden" name="request_id" value="{{ req.id }}">
+                        <button type="submit"
+                            class="ml-2 px-4 py-1 bg-green-500 text-white rounded hover:bg-green-600">Accept</button>
+                    </form>
+                    <form action="/rejectrequest" method="post">
+                        <input type="hidden" name="request_id" value="{{ req.id }}">
+                        <button type="submit"
+                            class="ml-2 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600">Reject</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="text-align: center;">
+    <h1><strong>Book Feedback</strong></h1>
+</div>
+
+<div style="padding: 10px; margin: 0 auto; width: 80%;">
+    <div style="background-color: white; padding: 10px;">
+        <table style="text-align: center; border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black;">Member Name</th>
+                    <th style="border: 1px solid black;">Book Name</th>
+                    <th style="border: 1px solid black;">Rating</th>
+                    <th style="border: 1px solid black;">Review</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rev, mem in reviews %}
+                <tr>
+                    <td style="border: 1px solid black;">{{ mem.name }}</td>
+                    <td style="border: 1px solid black;">{{ rev.book.title }}</td>
+                    <td style="border: 1px solid black;">{{ rev.rating }}</td>
+                    <td style="border: 1px solid black;">{{ rev.review }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

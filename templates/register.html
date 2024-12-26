@@ -1,0 +1,68 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="card-body">
+                    <h3 class="text-center text-primary mb-4">Register</h3>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <div class="alert alert-danger">
+                        {{ messages[0] }}
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                    <form method="POST" action="/register" onsubmit="return validateForm()">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input class="form-control" type="name" name="name" id="name" placeholder="Your Name"
+                                autofocus="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input class="form-control" type="email" name="email" id="email" placeholder="Your Email"
+                                autofocus="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Your Password</label>
+                            <input class="form-control" type="password" name="password" id="password"
+                                placeholder="Your Password">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Confirm Password</label>
+                            <input class="form-control" type="password" name="password-confirm" id="password-confirm"
+                                placeholder="Confirm Password">
+                            <small id="password-error" class="text-danger"></small>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('password-confirm');
+        const passwordError = document.getElementById('password-error');
+
+        console.log(passwordInput);
+
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            passwordError.textContent = 'Passwords do not match';
+            return false; // Prevent form submission
+        } else {
+            passwordError.textContent = '';
+            return true; // Allow form submission
+        }
+    }
+</script>
+
+{% endblock %}

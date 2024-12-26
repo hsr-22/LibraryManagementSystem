@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- user return page displaying all books borrowed by user and having an action of return -->
+<div class="container mx-auto">
+    <div class="flex justify-center items-center">
+        <div class="bg-white p-8 rounded shadow-md w-3/4">
+            <h1 class="text-center text-2xl mb-4">Revoke Book Access</h1>
+            <table class="mx-auto border-collapse">
+                <thead>
+                    <tr>
+                        <th class="border border-black px-4 py-2">Book ID</th>
+                        <th class="border border-black px-4 py-2">Book Name</th>
+                        <th class="border border-black px-4 py-2">Member Name</th>
+                        <th class="border border-black px-4 py-2">Author</th>
+                        <th class="border border-black px-4 py-2">Revoke</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tr, member, book in trans %}
+                    <tr>
+                        <td class="border border-black px-4 py-2">{{ book.id }}</td>
+                        <td class="border border-black px-4 py-2">{{ book.title }}</td>
+                        <td class="border border-black px-4 py-2">{{ member.name }}</td>
+                        <td class="border border-black px-4 py-2">{{ book.author }}</td>
+                        <td class="border border-black px-4 py-2">
+                            <form method="GET" action="{{ url_for('revoke_book', id = tr.id) }}">
+                                <button type="submit" class="bg-red-500 text-white rounded p-2">REVOKE</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
